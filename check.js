@@ -2,6 +2,13 @@ const config = require('./config.js');
 const mysql = require('mysql');
 const util = require('util');
 
+const reset = '\x1b[0m';
+const green = '\x1b[32m';
+const red = '\x1b[31m';
+const yellow = '\x1b[33m';
+const magenta = '\x1b[35m';
+const blue = '\x1b[34m';
+
 const dbTablesAndKeys = {
   answers: {
     userId: 'users',
@@ -174,24 +181,30 @@ async function checkForErrors(db) {
         if (!(table in errors)) errors[table] = [];
         
         for (const result of results) {
-          const error = `Row '${result['id']}' column '${column}' refers to ` +
-            `table '${referencedTable}' row '${result[column]}', but that ` +
-            `row does not exist.`;
+          const error = `Row ${magenta}${result['id']}${reset} column ` +
+            `${yellow}${column}${reset} refers to table ${blue}` +
+            `${referencedTable}${reset} row ${magenta}${result[column]}` +
+            `${reset}, but that row does not exist.`;
 
           errors.push(error);
         }
       }
     }
 
-    if (errors.length > 0) {
-      console.log('[ ' + '\x1b[31m' + 'Error' + '\x1b[0m' + ' ]');
-      for (const error of errors) {
-        console.log(' - ' + error)
+    const count = errors.length;
+
+    if (count > 0) {
+      console.log('[ ' + red + 'Error' + reset + ' ]');
+      
+      for (let i = 0; i < count; i++) {
+        const error = errors[i];
+        if (i == count - 1) console.log('         └─ ' + error);
+        else console.log('         ├─ ' + error);
       }
     }
 
     else {
-      console.log('[ ' + '\x1b[32m' + 'Ok' + '\x1b[0m' + ' ]');
+      console.log('[ ' + green + 'Ok' + reset + ' ]');
     }
   }
 }
