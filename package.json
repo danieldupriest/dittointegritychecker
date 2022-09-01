@@ -1,0 +1,22 @@
+{
+  "name": "dittointegritychecker",
+  "version": "1.0.0",
+  "description": "Runs a series of SQL statements to check for invalid references",
+  "main": "check.js",
+  "scripts": {
+    "check": "node check.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danieldupriest/dittointegritychecker.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danieldupriest/dittointegritychecker/issues"
+  },
+  "homepage": "https://github.com/danieldupriest/dittointegritychecker#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
