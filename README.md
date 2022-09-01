@@ -1,4 +1,4 @@
-# dittointegritychecker
+# Ditto Integrity Checker
 Runs a series of SQL statements on the Ditto database to check all references for validity, whether a constraint exists or not.
 
 ## Setup
