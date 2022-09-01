@@ -161,6 +161,7 @@ const main = async() => {
 main();
 
 async function checkForErrors(db) {
+  console.log(`Checking ${Object.keys(dbTablesAndKeys).length} tables...`);
   const errors = {};
   const tables = Object.keys(dbTablesAndKeys);
   const maxTableNameLength = Math.max(...tables.map(t => t.length));
@@ -168,7 +169,7 @@ async function checkForErrors(db) {
   for (const table of tables) {
     const keys = dbTablesAndKeys[table];
     const padding = 2 + maxTableNameLength - table.length;
-    process.stdout.write(`Checking ${table} ${'·'.repeat(padding)} `);
+    process.stdout.write(`${table} ${'·'.repeat(padding)} `);
     const errors = [];
 
     for (const [ column, referencedTable ] of Object.entries(keys)) {
@@ -198,8 +199,8 @@ async function checkForErrors(db) {
       
       for (let i = 0; i < count; i++) {
         const error = errors[i];
-        if (i == count - 1) console.log('         └─ ' + error);
-        else console.log('         ├─ ' + error);
+        if (i == count - 1) console.log('└─ ' + error);
+        else console.log('├─ ' + error);
       }
     }
 
