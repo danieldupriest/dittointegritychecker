@@ -197,6 +197,7 @@ async function checkForErrors(db) {
 }
   
 function makeDb(config) {
+  console.log(`Connecting to database '${config.host}'...`);
   const connection = mysql.createConnection(config);
 
   return {
